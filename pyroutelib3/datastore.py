@@ -248,8 +248,10 @@ class Datastore:
         profileSpecificKey = "restriction:" + self.transport
         if profileSpecificKey in rel["tag"]:
             restrType = rel["tag"][profileSpecificKey]
-        else:
+        elif rel["tag"].get("restriction"):
             restrType = rel["tag"]["restriction"]
+        else:
+            return False
         del profileSpecificKey
 
         if restrType.startswith("no_"):
